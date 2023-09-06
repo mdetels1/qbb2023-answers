@@ -37,9 +37,15 @@ yf = expressionf
 ym = expressionm
 ym2 = 2 * np.array(ym)
 
+x = [10, 11, 12, 13, "14A", "14B", "14C", "14D"]
+
 # Plot data
 fig, ax = plt.subplots()
-ax.set_title( "FBtr0073461" )
+ax.set_xlabel("developmental stage")
+ax.set_ylabel("mRNA abundance (RPKM)")
+ax.set_xticklabels(x, rotation = 90)
+ax.set_title( "SisA" )
+plt.tight_layout()
 ax.plot( x, yf )
 ax.plot( x, ym )
 ax.plot( x, ym2 )
