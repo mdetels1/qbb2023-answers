@@ -35,10 +35,13 @@ expressionm = data[row,colsm]
 x = samples[colsf]
 yf = expressionf
 ym = expressionm
+ym2 = 2 * np.array(ym)
 
 # Plot data
 fig, ax = plt.subplots()
 ax.set_title( "FBtr0073461" )
-ax.plot( x, yf, ym )
+ax.plot( x, yf )
+ax.plot( x, ym )
+ax.plot( x, ym2 )
 fig.savefig( "FBtr0073461.png" )
 plt.close( fig )
