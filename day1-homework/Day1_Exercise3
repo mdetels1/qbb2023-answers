@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+import numpy
+
+#open file with patient data
+f = open("inflammation-01.csv", "r")
+
+lines = f.readlines()
+
+#within the range of 200 to 240, looking for positions 0, 9, and -1
+
+#start a empty list
+start_coords = []
+
+#for the rows in lines (the file), do the following
+for line in lines:
+	line = line.rstrip() #strip of anything not of value
+	line_list = line.split(",") #this will split the values into individual ones based on commas but they will be strings
+	flare_coords = [] #another empty list that you will put all of the for in values from below into
+	for flare in line_list: #for all of the values in each of the rows that are lists above, do the following
+		flare = int(flare) #make all of the values integers, instead of strings
+		flare_coords.append(flare) # add all of the flare values that are now integers to the new empty list flare_coords
+	
+
+	start_coords.append(flare_coords) #add all of the flare_coords values to start_coords
+	
+averages = [] # empty list called averages
+for average in start_coords: #for all of the positions in start_coord which is all of the data as integers do the below
+	average = numpy.mean(average) #defining the average (each position) as the mean of each of the values
+	averages.append(average) # adding all of these values to the above list called averages
+
+print(numpy.max(averages)) #printing the maximum of the list of averages created above
+print(numpy.min(averages)) #printing the minimum of the list of averages created above

@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+#open file with patient data
+f = open("inflammation-01.csv", "r")
+
+lines = f.readlines()
+
+#within the range of 200 to 240, looking for positions 0, 9, and -1
+
+#start a empty list
+start_coords = []
+
+#for the rows in lines (the file), do the following
+for line in lines:
+	line = line.rstrip() #strip of anything not of value
+	line_list = line.split(",") #this will split the values into individual ones based on commas but they will be strings
+	flare_coords = [] #another empty list that you will put all of the for in values from below into
+	for flare in line_list: #for all of the values in each of the rows that are lists above, do the following
+		flare = int(flare) #make all of the values integers, instead of strings
+		flare_coords.append(flare) # add all of the flare values that are now integers to the new empty list flare_coords
+	
+
+	start_coords.append(flare_coords) #add all of the flare_coords values to start_coords
+	
+
+print(start_coords[4][0]) #print the value from row 5 in the first position
+print(start_coords[4][9])#print the value from row 5 in the tenth position
+print(start_coords[4][-1])#print the value from row 5 in the last position
