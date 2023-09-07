@@ -11,7 +11,7 @@ def my_mean(numbers):
 	total = sum(numbers)
 	return total/amount
 
-patient_id = 1
+patient_id = 0
 average_list = {}
 for lines in data:
 	fixed_numbers = lines.rstrip()
@@ -27,4 +27,3 @@ for lines in data:
 
 for key, value in average_list.items():
 	print(key, my_mean(value))
-
