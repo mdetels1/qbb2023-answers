@@ -48,28 +48,53 @@ def WF(frequency, population):
 
 # # ax2.hist(hist_generations)
 
-my_dict = {}
-my_populations = [75, 400, 822, 66, 111]
-for i in my_populations:
-	my_dict[i] = []
+# my_dict = {}
+# my_populations = [75, 400, 822, 66, 111]
+# for i in my_populations:
+# 	my_dict[i] = []
+# 	for something in range(50):
+# 		my_wf_model = WF(0.5,i)
+# 		more = len(my_wf_model[1])
+# 		my_dict[i].append(more)
+
+
+# dict_ave = []
+# for time in my_dict.keys():
+# 	dict_ave.append(np.average(my_dict[time]))
+
+# fig, ax = plt.subplots()
+# ax.set_title("Average Time to Fixation with Increasing Population Sizes")
+# ax.set_xlabel("Population Size")
+# ax.set_ylabel("Average Time to Fixation")
+
+# ax.scatter(my_populations,dict_ave)
+# plt.tight_layout()
+# figure = fig.savefig("Average_Time_to_Fixation_Increasing_Pop_Size.pdf")
+
+# plt.show()
+
+my_freq_dict = {}
+my_freq = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
+for i in my_freq:
+	my_freq_dict[i] = []
 	for something in range(50):
-		my_wf_model = WF(0.5,i)
-		more = len(my_wf_model[1])
-		my_dict[i].append(more)
+		my_wf_model = WF(i,1000)
+		more = len(my_wf_model[0])
+		my_freq_dict[i].append(more)
 
 
-dict_ave = []
-for time in my_dict.keys():
-	dict_ave.append(np.average(my_dict[time]))
+dict_freq_ave = []
+for time in my_freq_dict.keys():
+	dict_freq_ave.append(np.average(my_freq_dict[time]))
 
 fig, ax = plt.subplots()
-ax.set_title("Average Time to Fixation with Increasing Population Sizes")
-ax.set_xlabel("Population Size")
+ax.set_title("Average Time to Fixation with Increasing Frequency Sizes")
+ax.set_xlabel("Frequency")
 ax.set_ylabel("Average Time to Fixation")
 
-ax.scatter(my_populations,dict_ave)
+ax.scatter(my_freq,dict_freq_ave)
 plt.tight_layout()
-figure = fig.savefig("Average_Time_to_Fixation_Increasing_Pop_Size.pdf")
+figure = fig.savefig("Average_Time_to_Fixation_Increasing_Freq_Size.pdf")
 
 plt.show()
 
