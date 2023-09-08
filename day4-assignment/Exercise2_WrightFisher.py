@@ -35,15 +35,27 @@ def WF(frequency, population):
 #print(my_result)
 #print("number of generations to fixation:", len(my_result))
 
-fig, ax = plt.subplots()
-for i in range(30):
-	my_result = WF(0.5,1000)
+fig, (ax1, ax2) = plt.subplots(2)
+
+hist_generations = []
+for i in range(1000):
+	my_result = WF(0.5,150)
 	x_position = my_result[1]
+	hist_generations.append(len(x_position))
 	y_position = my_result[0]
-	ax.plot(x_position,y_position)
-	#plt.plot(my_result[1], my_result[0])
-plt.xlabel("Time (Generations)")
-plt.ylabel("Allele Frequency")
-plt.title("Allele Frequency of Population Over Generations")
-figure = fig.savefig("30 Iterations of Allele Frequency of Population Over Time")
+	ax1.plot(x_position,y_position)
+	ax1.plot(my_result[1], my_result[0])
+
+ax2.hist(hist_generations)
+
+
+ax1.set_xlabel("Time (Generations)")
+ax1.set_ylabel("Allele Frequency")
+ax1.set_title("Allele Frequency of Population Over Generations")
+ax2.set_xlabel("Generations")
+ax2.set_ylabel("Number of Occurences")
+ax2.set_title("Histogram of Generations to Fixation")
+plt.tight_layout()
+figure = fig.savefig("30_Exercise_2_2.pdf")
+
 plt.show()
