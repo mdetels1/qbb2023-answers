@@ -106,9 +106,9 @@ plt.tight_layout()
 
 ax.scatter(Together.loc[:, "maternal_dnm"], Together.loc[:, "Mother_age"], color = "pink")
 
-figure = fig.savefig("ex2_a.png")
+#figure = fig.savefig("ex2_a.png")
 
-plt.show()
+#plt.show()
 
 fig, ax = plt.subplots()
 
@@ -119,6 +119,23 @@ plt.tight_layout()
 
 ax.scatter(Together.loc[:, "paternal_dnm"], Together.loc[:, "Father_age"], color = "blue")
 
-figure = fig.savefig("ex2_b.png")
+#figure = fig.savefig("ex2_b.png")
 
-plt.show()
+#plt.show()
+
+# Now that you’ve visualized these relationships, 
+# you’re curious whether they’re statistically significant. 
+# Perform ordinary least squares using the smf.ols() 
+# function to test for an association between maternal 
+# age and maternally inherited de novo mutations. In your 
+# README.md for this assignment, answer the following 
+# questions:
+
+import statsmodels.formula.api as smf
+stats = smf.ols(formula = "maternal_dnm ~ 1 + Mother_age", data = Together).fit()
+print(stats.summary())
+
+# What is the “size” of this relationship? In your own 
+# words, what does this mean? Does this match what you 
+# observed in your plots in step 2.1?
+# Is this relationship significant? How do you know?
