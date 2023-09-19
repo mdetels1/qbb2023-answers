@@ -139,3 +139,18 @@ print(stats.summary())
 # words, what does this mean? Does this match what you 
 # observed in your plots in step 2.1?
 # Is this relationship significant? How do you know?
+
+
+# As before, perform ordinary least squares using the 
+# smf.ols() function, but this time to test for an 
+# association between paternal age and paternally inherited 
+# de novo mutations. In your README.md for this assignment, 
+# answer the following questions:
+
+stats = smf.ols(formula = "paternal_dnm ~ 1 + Father_age", data = Together).fit()
+print(stats.summary())
+
+# What is the “size” of this relationship? In your 
+# own words, what does this mean? Does this match what 
+# you observed in your plots in step 6?
+# Is this relationship significant? How do you know?
