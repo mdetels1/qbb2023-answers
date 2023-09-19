@@ -109,3 +109,16 @@ ax.scatter(Together.loc[:, "maternal_dnm"], Together.loc[:, "Mother_age"], color
 figure = fig.savefig("ex2_a.png")
 
 plt.show()
+
+fig, ax = plt.subplots()
+
+ax.set_xlabel("Paternal Age (Year)")
+ax.set_ylabel("De novo Mutations (Count)")
+ax.set_title("De Novo Mutations vs Age of Male Parents")
+plt.tight_layout()
+
+ax.scatter(Together.loc[:, "paternal_dnm"], Together.loc[:, "Father_age"], color = "blue")
+
+figure = fig.savefig("ex2_b.png")
+
+plt.show()
