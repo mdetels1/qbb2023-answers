@@ -97,27 +97,27 @@ import matplotlib.pyplot as plt
 #the count of paternal de novo mutations vs. paternal age 
 #(upload as ex2_b.png in your submission directory)
 
-fig, ax = plt.subplots()
+# fig, ax = plt.subplots()
 
-ax.set_xlabel("Maternal Age (Year)")
-ax.set_ylabel("De novo Mutations (Count)")
-ax.set_title("De Novo Mutations vs Age of Female Parents")
-plt.tight_layout()
+# ax.set_xlabel("Maternal Age (Year)")
+# ax.set_ylabel("De novo Mutations (Count)")
+# ax.set_title("De Novo Mutations vs Age of Female Parents")
+# plt.tight_layout()
 
-ax.scatter(Together.loc[:, "maternal_dnm"], Together.loc[:, "Mother_age"], color = "pink")
+# ax.scatter(Together.loc[:, "maternal_dnm"], Together.loc[:, "Mother_age"], color = "pink")
 
 #figure = fig.savefig("ex2_a.png")
 
 #plt.show()
 
-fig, ax = plt.subplots()
+# fig, ax = plt.subplots()
 
-ax.set_xlabel("Paternal Age (Year)")
-ax.set_ylabel("De novo Mutations (Count)")
-ax.set_title("De Novo Mutations vs Age of Male Parents")
-plt.tight_layout()
+# ax.set_xlabel("Paternal Age (Year)")
+# ax.set_ylabel("De novo Mutations (Count)")
+# ax.set_title("De Novo Mutations vs Age of Male Parents")
+# plt.tight_layout()
 
-ax.scatter(Together.loc[:, "paternal_dnm"], Together.loc[:, "Father_age"], color = "blue")
+# ax.scatter(Together.loc[:, "paternal_dnm"], Together.loc[:, "Father_age"], color = "blue")
 
 #figure = fig.savefig("ex2_b.png")
 
@@ -133,7 +133,7 @@ ax.scatter(Together.loc[:, "paternal_dnm"], Together.loc[:, "Father_age"], color
 
 import statsmodels.formula.api as smf
 stats = smf.ols(formula = "maternal_dnm ~ 1 + Mother_age", data = Together).fit()
-print(stats.summary())
+#print(stats.summary())
 
 # What is the “size” of this relationship? In your own 
 # words, what does this mean? Does this match what you 
@@ -148,9 +148,32 @@ print(stats.summary())
 # answer the following questions:
 
 stats = smf.ols(formula = "paternal_dnm ~ 1 + Father_age", data = Together).fit()
-print(stats.summary())
+#print(stats.summary())
 
 # What is the “size” of this relationship? In your 
 # own words, what does this mean? Does this match what 
 # you observed in your plots in step 6?
 # Is this relationship significant? How do you know?
+
+
+
+
+# Next, you’re curious whether the number of 
+# paternally inherited DNMs match the number of maternally 
+# inherited DNMs. Using matplotlib, plot the distribution 
+# of maternal DNMs per proband (as a histogram). In the 
+# same panel (i.e. the same axes) plot the distribution of 
+# paternal DNMs per proband. Make sure to make the 
+# histograms semi-transparent so you can see both 
+# distributions. Upload as ex2_c.png in your submission 
+# directory.
+
+fig, ax1 = plt.subplots()
+ax1.hist(Together.loc[:, "maternal_dnm"], alpha = 0.5, color = "pink", label = "Maternal_dnms")
+ax1.hist(Together.loc[:, "paternal_dnm"], alpha = 0.5, color = "lightblue", label = "Paternal_dnms")
+ax1.legend()
+ax1.set_xlabel("De Novo Mutations (DNMS)")
+ax1.set_ylabel("Occurences")
+ax1.set_title("Occurences of DNMs from Male and Female Parents")
+plt.tight_layout()
+plt.show()
