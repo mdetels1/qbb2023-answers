@@ -176,4 +176,24 @@ ax1.set_xlabel("De Novo Mutations (DNMS)")
 ax1.set_ylabel("Occurences")
 ax1.set_title("Occurences of DNMs from Male and Female Parents")
 plt.tight_layout()
-plt.show()
+#figure = fig.savefig("ex2_c.png")
+#plt.show()
+
+# Now that you’ve visualized this relationship, you 
+# want to test whether there is a significant difference 
+# between the number of maternally vs. paternally 
+# inherited DNMs per proband. What would be an 
+# appropriate statistical test to test this relationship? 
+# Choose a statistical test, and find a Python package 
+# that lets you perform this test. If you’re not sure 
+# where to look, the stats module from scipy (more here) 
+# provides tools to perform several different useful 
+# statistical tests. After performing your test, answer 
+# the following answers in your README.md for this 
+# assignment:
+
+import scipy.stats as sps
+
+print(sps.ttest_ind(Together.loc[:, "maternal_dnm"], Together.loc[:, "paternal_dnm"]))
+
+
