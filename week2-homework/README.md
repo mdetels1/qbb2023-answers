@@ -41,3 +41,6 @@ Exercise 2.5
 
 ATT TTG TGA GAT ATT TTC TCT CTT TTA TAT ATT TTC TCA CAT
 
+Exercise 2.6
+
+In order to reconstruct the sequence of the genome you would want to know the length of the sequence before you broke it apart. You would also want to know the start sequence and end sequence if possible. These things would help you put the sequence back together with more accuracy.
