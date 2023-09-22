@@ -32,3 +32,7 @@ In the simulation, there are 7 bases with 0 coverage or 0.0007% of the genome.
 2 How well does this match Poisson expectations? How well does the normal distribution fit the data?
 
 The Poisson expectations again match the histogram. As with 10X, the normal distribution fits the data fairly well but better than the 10X. Although again, the Poisson expectation matches better than the normal distribution.
+
+Exercise 2.4
+
+dot -Tpng edges.txt > output.png
