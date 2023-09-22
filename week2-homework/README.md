@@ -36,3 +36,8 @@ The Poisson expectations again match the histogram. As with 10X, the normal dist
 Exercise 2.4
 
 dot -Tpng edges.txt > output.png
+
+Exercise 2.5
+
+ATT TTG TGA GAT ATT TTC TCT CTT TTA TAT ATT TTC TCA CAT
+
