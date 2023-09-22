@@ -47,9 +47,9 @@ def simulate_converage(coverage, genome_len, read_len, figname): #creating a fun
 	fig.savefig(figname)
 
 
-simulate_converage(3,1_000_000, 100, 'ex1_3x_cov.png')
+#simulate_converage(3,1_000_000, 100, 'ex1_3x_cov.png')
 
-
+simulate_converage(10,1_000_000, 100, 'ex1_10x_cov.png')
 
 
 
