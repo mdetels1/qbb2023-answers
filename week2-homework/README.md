@@ -82,3 +82,7 @@ Collins, F. S., & McKusick, V. A. (2001). Implications of the Human Genome Proje
 van Dijk, E. L., Auger, H., Jaszczyszyn, Y., & Thermes, C. (2014). Ten years of next-generation sequencing technology. Trends in genetics, 30(9), 418-426.
 Morozova, O., & Marra, M. A. (2008). Applications of next-generation sequencing technologies in functional genomics. Genomics, 92(5), 255-264.
 Khush, G. S. (2001). Green revolution: preparing for the 21st century. Genome, 44(5), 646-655.
+
+Exercise 3.2
+
+The essay it gave makes sense logically and does a good job of outlining the main ideas in genomics and reasons that people in general are interested in genomics. One thing it has that I would not have written is about my personal experience tracing my own genetic lineage through 23andMe because I have never used this service before. I think that some of the more personal reasons people might have are lost in this essay. All of the citations make sense in the context of the essay and they are all real papers. This was all extremely surprising to me having never used chatGPT before. It is an extremely useful tool if used the correct way.
