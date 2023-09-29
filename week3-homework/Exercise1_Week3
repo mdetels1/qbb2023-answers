@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+import numpy as np
+import sys
+from fasta import readFASTA
+import pandas as pd
+
+file = sys.argv[1]
+methodfile = sys.argv[2]
+
+def my_function(FASTA_file, scoring_system):
+	input_sequences = readFASTA(open(FASTA_file))
+
+	seq1_id, sequence1 = input_sequences[0]
+	seq2_id, sequence2 = input_sequences[1]
+
+	scoring = pd.read_csv(scoring_system, delim_whitespace=True)
+
+	return seq1_id, sequence1, seq2_id, sequence2, scoring
+
+sq1_name, sq1, sq2_name, sq2, scoring_matrix = my_function(file, methodfile)
+
+gap_penalty = float(sys.argv[3])
+
+#output = sys.argv[4]
