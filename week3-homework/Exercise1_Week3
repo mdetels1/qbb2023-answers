@@ -23,3 +23,6 @@ sq1_name, sq1, sq2_name, sq2, scoring_matrix = my_function(file, methodfile)
 gap_penalty = float(sys.argv[3])
 
 #output = sys.argv[4]
+
+F_matrix = np.zeros((len(sq1)+1, len(sq2)+1))
+traceback_matrix = np.zeros((len(sq1)+1, len(sq2)+1))
