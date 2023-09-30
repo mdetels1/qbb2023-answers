@@ -15,7 +15,7 @@ What is the “size” of this relationship? In your
 own words, what does this mean? Does this match what 
 you observed in your plots in step 6?
 
-The size of this relationship is 1.3538. This means that as the amount of paternal de novo mutations increases, the paternal age increases by 1.3538. This does match my observation in the plots, it is DNMs are increasing as maternal age increases, again not very steeply but more steeply than the maternal DNMs vs age.
+The size of this relationship is 1.3538. This means that as the the paternal age increases, the amount of paternal de novo mutations increases by 1.3538. This does match my observation in the plots, it is DNMs are increasing as maternal age increases, again not very steeply but more steeply than the maternal DNMs vs age.
 
 Is this relationship significant? How do you know?
 
