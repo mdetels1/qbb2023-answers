@@ -74,3 +74,17 @@ while end1 != 0 and end2 != 0:
 		alignment2 = "_" + alignment2
 		end2 = end2 - 1
 		gap1 = gap1 + 1
+file_output = open(sys.argv[4], "w")
+
+alignment1_output = "Sequence 1: " + alignment1
+alignment2_output = "Sequence 2: " + alignment2
+Gap_number1 = "Number of gaps in Sequence 1: " + str(gap1)
+Gap_number2 = "Number of gaps in Sequence 2: " + str(gap2)
+Alignment_Score = "Score of the alignment: " + str(F_matrix[-1,-1])
+
+file_output.write(
+	alignment1_output + "\n" +
+	alignment2_output + "\n" +
+	Gap_number1 + "\n" + 
+	Gap_number2 + "\n" +
+	Alignment_Score)
