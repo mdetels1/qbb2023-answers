@@ -7,6 +7,7 @@ import pandas as pd
 
 file = sys.argv[1]
 methodfile = sys.argv[2]
+file_output = sys.argv[4]
 
 def my_function(FASTA_file, scoring_system):
 	input_sequences = readFASTA(open(FASTA_file))
@@ -50,7 +51,26 @@ for i in range(1, F_matrix.shape[0]):
 		else:
 			traceback_matrix[i,j] = "v"
 
-print(F_matrix)
-print(traceback_matrix)
 
 
+alignment1 = ""
+alignment2 = ""
+end1 = len(sq1)-1
+end2 = len(sq2)-1
+gap1 = 0
+gap2 = 0
+
+while end1 != 0 and end2 != 0:
+	if traceback_matrix[end1,end2] == "d":
+		alignment1 = sq1[end1] + alignment1
+		alignment2 = sq2[end2] + alignment2
+		end1 = end1 - 1
+		end2 = end2 - 1
+	elif traceback_matrix[end1, end2] == "v":
+		alignment1 = "_" + alignment1
+		end1 = end1 - 1
+		gap2 = gap2 + 1
+	elif traceback_matrix[end1, end2] == "h":
+		alignment2 = "_" + alignment2
+		end2 = end2 - 1
+		gap1 = gap1 + 1
