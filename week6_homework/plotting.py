@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 plink = np.loadtxt("plink.eigenvec")
 
@@ -15,6 +16,16 @@ plt.ylabel("pca2")
 plt.title("Genotype PCs")
 fig.tight_layout()
 plt.savefig("GenotypePCs.pdf")
-plt.show()
 
 
+freq = pd.read_csv("plink.frq", delim_whitespace=True)
+allelefreq = freq["MAF"]
+
+fig, ax = plt.subplots()
+ax.hist(allelefreq, bins = 80)
+ax.set_xlabel("Frequency")
+ax.set_ylabel("Count")
+plt.title("Allele Frequencies")
+fig.tight_layout()
+fig.show()
+fig.savefig("Allelefrequencies.pdf")
