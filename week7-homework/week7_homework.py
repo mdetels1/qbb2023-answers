@@ -35,14 +35,16 @@ for i in range(len(bisulfite)):
 		bisulfite_multi.add(bisulfite[i][1])
 bisulfite_single = bisulfite_set.difference(bisulfite_multi) # unique sites in bisulfite
 
-ONTcompare = ONT_single.difference(bisulfite_single)
+ONTcompare = ONT_single - bisulfite_single
 bisulfitecompare = bisulfite_single.difference(ONT_single)
-totalsites = (len(ONT_single)+len(bisulfite_single)) - (len(ONTcompare)+len(bisulfitecompare))
+overlappingsites = (len(ONT_single)+len(bisulfite_single)) - (len(ONTcompare)+len(bisulfitecompare))
+totalsites = (len(ONT_single)+len(bisulfite_single))
 
-
-
-print(len(ONT_single))
-print(len(bisulfite_single))
+print(ONTcompare)
+print(len(ONTcompare))
+print(len(bisulfitecompare))
+print(overlappingsites)
 print(totalsites)
-
-
+print(len(ONTcompare)/totalsites)
+print(len(bisulfitecompare)/totalsites)
+print(overlappingsites/totalsites)
