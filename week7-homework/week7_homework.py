@@ -37,31 +37,33 @@ bisulfite_single = bisulfite_set.difference(bisulfite_multi) # unique sites in b
 
 ONTcompare = ONT_single - bisulfite_single
 bisulfitecompare = bisulfite_single.difference(ONT_single)
-overlappingsites = (len(ONT_single)+len(bisulfite_single)) - (len(ONTcompare)+len(bisulfitecompare))
-totalsites = (len(ONT_single)+len(bisulfite_single))
+overlappingsitesset = ONT_single.intersection(bisulfite_single)
+totalsites = (len(ONT_single)+len(bisulfite_single))-(len(overlappingsitesset))
 
-# print(ONTcompare)
-# print(len(ONTcompare))
-# print(len(bisulfitecompare))
-# print(overlappingsites)
-# print(totalsites)
-# print(len(ONTcompare)/totalsites)
-# print(len(bisulfitecompare)/totalsites)
-# print(overlappingsites/totalsites)
+print(ONTcompare)
+print(len(ONTcompare))
+print(len(bisulfitecompare))
+print(len(overlappingsitesset))
+print(totalsites)
+print(len(ONTcompare)/totalsites)
+print(len(bisulfitecompare)/totalsites)
+print(len(overlappingsitesset)/totalsites)
 
 
 ONT_df = pd.DataFrame(ONT, columns = ["Chromosome", "Start", "End", "PercentMethylated", "ReadCoverage"])
 bisulfite_df = pd.DataFrame(bisulfite, columns = ["Chromosome", "Start", "End", "PercentMethylated", "ReadCoverage"])
 
 
-plt.figure()
-plt.hist(ONT_df["ReadCoverage"], bins=1000, alpha=0.5, color='blue', label='ONT')
-plt.hist(bisulfite_df["ReadCoverage"], bins=1500, alpha=0.5, color='red', label='Bisulfite')
-plt.xlim(0,100)
-plt.xlabel("Read Coverage")
-plt.ylabel("Count")
-plt.title("Distribution of Coverages Across CpG Sites")
-plt.legend()
-plt.show()
-plt.savefig(out_fname)
+# plt.figure()
+# plt.hist(ONT_df["ReadCoverage"], bins=1000, alpha=0.5, color='blue', label='ONT')
+# plt.hist(bisulfite_df["ReadCoverage"], bins=1500, alpha=0.5, color='red', label='Bisulfite')
+# plt.xlim(0,100)
+# plt.xlabel("Read Coverage")
+# plt.ylabel("Count")
+# plt.title("Distribution of Coverages Across CpG Sites")
+# plt.legend()
+# plt.savefig(out_fname)
+
+# print(overlappingsites)
+# print(len(overlappingsitesset))
 
