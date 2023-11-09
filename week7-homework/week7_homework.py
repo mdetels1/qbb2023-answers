@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-ONT_fname, bisulfite_fname, out_fname = sys.argv[1:4]
+ONT_fname, bisulfite_fname, normal_fname, tumor_fname, out_fname = sys.argv[1:6]
 
 def load_data(fname):
     data = []
@@ -81,9 +81,32 @@ for i in range(len(bisulfite_df["Start"])):
 fig = plt.figure()
 histogram = np.histogram2d(bisulfite_list, ONT_list, bins = 100)[0]
 histogram_transformed = np.log10(histogram + 1)
-plt.xlabel("Bisulfite Percent Methylated")
-plt.ylabel("Nanopore Percent Methylated")
-plt.title("Heatmap Comparing Percent Methylation of Nanopore and Bisulfite")
+plt.xlabel("Bisulfite Methylated Frequency")
+plt.ylabel("Nanopore Methylated Frequency")
+pearson = np.corrcoef(bisulfite_list, ONT_list)[0,1]
+plt.title(f"Methylation Frequency of Nanopore and Bisulfite, R= {pearson:0.3f}")
 plt.imshow(histogram_transformed)
 plt.savefig(out_fname)
 
+
+
+normal = load_data(normal_fname)
+tumor = load_data(tumor_fname)
+
+normal_set = set()
+normal_multi = set()
+for i in range(len(normal)):
+	if normal[i][1] not in normal_set:
+		normal_set.add(ONT[i][1])
+	else:
+		normal_multi.add(ONT[i][1])
+normal_single = normal_set.difference(normal_multi) # unique sites in nanopore
+
+tumor_set = set()
+tumor_multi = set()
+for i in range(len(tumor)):
+	if tumor[i][1] not in tumor_set:
+		tumor_set.add(tumor[i][1])
+	else:
+		tumor_multi.add(tumor[i][1])
+bisulfite_single = bisulfite_set.difference(bisulfite_multi) # unique sites in bisulfite
