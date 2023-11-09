@@ -6,9 +6,9 @@ The majority of CpG dinucleotides do not appear to be methylated.
 
 ## Exercise 3a ##
 
-Only in Nanopore : 53346 sites or 0.61%
-Only in bisulfite: 132466 sites or 1.51%
-Overlapping sites: 8593284 sites or 97.88%
+Only in Nanopore : 53346 sites or 1.19%
+Only in bisulfite: 132466 sites or 2.96%
+Overlapping sites: 4296642 sites or 95.85%
 
 ## Exercise 3b ##
 
