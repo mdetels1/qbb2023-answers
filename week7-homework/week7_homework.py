@@ -3,6 +3,7 @@
 import sys
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 ONT_fname, bisulfite_fname, out_fname = sys.argv[1:4]
 
@@ -40,14 +41,14 @@ bisulfitecompare = bisulfite_single.difference(ONT_single)
 overlappingsitesset = ONT_single.intersection(bisulfite_single)
 totalsites = (len(ONT_single)+len(bisulfite_single))-(len(overlappingsitesset))
 
-print(ONTcompare)
-print(len(ONTcompare))
-print(len(bisulfitecompare))
-print(len(overlappingsitesset))
-print(totalsites)
-print(len(ONTcompare)/totalsites)
-print(len(bisulfitecompare)/totalsites)
-print(len(overlappingsitesset)/totalsites)
+# print(ONTcompare)
+# print(len(ONTcompare))
+# print(len(bisulfitecompare))
+# print(len(overlappingsitesset))
+# print(totalsites)
+# print(len(ONTcompare)/totalsites)
+# print(len(bisulfitecompare)/totalsites)
+# print(len(overlappingsitesset)/totalsites)
 
 
 ONT_df = pd.DataFrame(ONT, columns = ["Chromosome", "Start", "End", "PercentMethylated", "ReadCoverage"])
@@ -66,4 +67,23 @@ bisulfite_df = pd.DataFrame(bisulfite, columns = ["Chromosome", "Start", "End", 
 
 # print(overlappingsites)
 # print(len(overlappingsitesset))
+
+ONT_list = []
+for i in range(len(ONT_df["Start"])):
+	if ONT_df["Start"][i] in overlappingsitesset:
+		ONT_list.append(ONT_df["PercentMethylated"][i])
+
+bisulfite_list = []
+for i in range(len(bisulfite_df["Start"])):
+	if bisulfite_df["Start"][i] in overlappingsitesset:
+		bisulfite_list.append(bisulfite_df["PercentMethylated"][i])
+
+fig = plt.figure()
+histogram = np.histogram2d(bisulfite_list, ONT_list, bins = 100)[0]
+histogram_transformed = np.log10(histogram + 1)
+plt.xlabel("Bisulfite Percent Methylated")
+plt.ylabel("Nanopore Percent Methylated")
+plt.title("Heatmap Comparing Percent Methylation of Nanopore and Bisulfite")
+plt.imshow(histogram_transformed)
+plt.savefig(out_fname)
 
