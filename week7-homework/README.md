@@ -15,3 +15,9 @@ Overlapping sites: 4296642 sites or 95.85%
 How does using nanopore for methylation calling differ from bisulfite sequencing in terms of coverage? Which method appears better and why?
 
 Nanopore has less read coverage than the bisulfite, nanopore seems to have a peak at around 30 and bisulfite has a peak around 50. Therefore, bisulfite sequencing seems better in terms of the amount of read coverage.
+
+## Exercise 3d ##
+
+It looks like the graphs are different. The bisulfite percent difference is closer to 0 compared to the ONT that have more stretched out.
+
+The two methods don't match, so it is difficult from this data to make any conclusions from the data about global methylation patterns in tumorgenesis.
