@@ -21,3 +21,14 @@ Nanopore has less read coverage than the bisulfite, nanopore seems to have a pea
 It looks like the graphs are different. The bisulfite percent difference is closer to 0 compared to the ONT that have more stretched out.
 
 The two methods don't match, so it is difficult from this data to make any conclusions from the data about global methylation patterns in tumorgenesis.
+
+## Exercise 4a ##
+
+There seem to be sections of the genome in the normal sample that have no methylation whereas the entire tumor is methylated.
+
+## Exercise 4b ##
+
+They look the same to me.
+Imprinting is the idea that certain genes are expressed as a inheritance of epigenetics from the mother or father.
+It doesn't work, you need to zoom out in order to cluster.
+No, I don't think so. Because I had to zoom out in order to cluster phase
