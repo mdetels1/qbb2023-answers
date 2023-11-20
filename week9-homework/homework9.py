@@ -9,10 +9,10 @@ from pydeseq2 import preprocessing
 from pydeseq2.dds import DeseqDataSet
 from pydeseq2.ds import DeseqStats
 
-# # read in data
+# # # read in data
 # counts_df = pd.read_csv("gtex_whole_blood_counts_formatted.txt", index_col = 0)
 
-# # read in metadata
+# # # read in metadata
 # metadata = pd.read_csv("gtex_metadata.txt", index_col = 0)
 
 # counts_df_normed = preprocessing.deseq2_norm(counts_df)[0]
@@ -49,23 +49,55 @@ from pydeseq2.ds import DeseqStats
 
 # genes.to_csv("outgenes.csv", index = False)
 
-genesout = pd.read_csv("outgenes.csv")
+# genesout = pd.read_csv("outgenes.csv")
 
-fdr = multitest.fdrcorrection(genesout["pval"].fillna(1.0), alpha=0.05, method='indep', is_sorted=False)
+# fdr = multitest.fdrcorrection(genesout["pval"].fillna(1.0), alpha=0.05, method='indep', is_sorted=False)
 
-genesout["fdr"] = (fdr[1])
+# genesout["fdr"] = (fdr[1])
 
-genesout.loc[genesout["fdr"] <= 0.1, "Gene"].to_csv("significantgenes.csv")
+# genesout.loc[genesout["fdr"] <= 0.1, "Gene"].to_csv("significantgenes.csv")
+
+# dds = DeseqDataSet(
+#     counts=counts_df,
+#     metadata=metadata,
+#     design_factors="SEX",
+#     n_cpus=4,
+# )
+
+# dds.deseq2()
+# stat_res = DeseqStats(dds)
+# stat_res.summary()
+# results = stat_res.results_df
+
+# results = results.rename_axis("Genes").reset_index()
+# print(results)
+
+# results.loc[results["padj"] <= 0.1, "Genes"].to_csv("significantgenesdeseq.csv")
 
 
+mygenes = pd.read_csv("significantgenes.csv")
+ddsgenes = pd.read_csv("significantgenesdeseq.csv")
+
+mygenes_set = set(map(tuple,mygenes.to_numpy()))
+
+ddsgenes_set = set(map(tuple,ddsgenes.to_numpy()))
+
+# find find genes that overlap
+overlap = mygenes_set.intersection(ddsgenes_set)
+print(len(overlap))
+
+# find genes that are unique to mygenes
+mygenes_unique = mygenes_set.difference(ddsgenes_set)
+print(len(mygenes_unique))
+
+# find genes that are unique to ddsgenes
+ddsgenes_unique = ddsgenes_set.difference(mygenes_set)
+print(len(ddsgenes_unique))
+
+jaccardindex = ((len(overlap)) / (len(mygenes_unique)+len(ddsgenes_unique))) * 100
 
 
-
-
-
-
-
-
+print(jaccardindex)
 
 
 
