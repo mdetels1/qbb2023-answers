@@ -60,7 +60,7 @@ end2 = len(sq2)
 gap1 = 0
 gap2 = 0
 
-while end1 != 0 and end2 != 0:
+while end1 != 0 or end2 != 0:
 	if traceback_matrix[end1,end2] == "d":
 		alignment1 = sq1[end1] + alignment1
 		alignment2 = sq2[end2] + alignment2
