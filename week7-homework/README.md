@@ -31,4 +31,8 @@ There seem to be sections of the genome in the normal sample that have no methyl
 They look the same to me.
 Imprinting is the idea that certain genes are expressed as a inheritance of epigenetics from the mother or father.
 It doesn't work, you need to zoom out in order to cluster.
-No, I don't think so. Because I had to zoom out in order to cluster phase
+No, I don't think so. Because I had to zoom out in order to cluster phase.
+
+
+## Revision answers ##
+Phasing is figuring out which alleles came from which parent, the maternal or paternal. The VCF file gives us this information which is in the "GT" field.
