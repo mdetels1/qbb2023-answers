@@ -8,8 +8,9 @@ from statsmodels.stats import multitest
 from pydeseq2 import preprocessing
 from pydeseq2.dds import DeseqDataSet
 from pydeseq2.ds import DeseqStats
+import matplotlib.pyplot as plt
 
-# # # read in data
+# # read in data
 # counts_df = pd.read_csv("gtex_whole_blood_counts_formatted.txt", index_col = 0)
 
 # # # read in metadata
@@ -22,10 +23,10 @@ from pydeseq2.ds import DeseqStats
 # full_design_df = pd.concat([counts_df_normed, metadata], axis=1)
 
 # # # model = smf.ols(formula = 'Q("DDX11L1") ~ SEX', data=full_design_df)
-# # # results = model.fit()
+# # results = model.fit()
 
-# # slope = results.params[1]
-# # pval = results.pvalues[1]
+# slope = results.params[1]
+# pval = results.pvalues[1]
 
 
 # name = ["Gene", "slope", "pval"]
@@ -72,32 +73,66 @@ from pydeseq2.ds import DeseqStats
 # results = results.rename_axis("Genes").reset_index()
 # print(results)
 
+# results.to_csv("resultsdds.csv", index = False)
+
 # results.loc[results["padj"] <= 0.1, "Genes"].to_csv("significantgenesdeseq.csv")
 
 
-mygenes = pd.read_csv("significantgenes.csv")
-ddsgenes = pd.read_csv("significantgenesdeseq.csv")
+# mygenes = pd.read_csv("significantgenes.csv")
+# ddsgenes = pd.read_csv("significantgenesdeseq.csv")
 
-mygenes_set = set(map(tuple,mygenes.to_numpy()))
+# mygenes_set = set(map(tuple,mygenes.to_numpy()))
 
-ddsgenes_set = set(map(tuple,ddsgenes.to_numpy()))
+# ddsgenes_set = set(map(tuple,ddsgenes.to_numpy()))
 
-# find find genes that overlap
-overlap = mygenes_set.intersection(ddsgenes_set)
-print(len(overlap))
+# # find find genes that overlap
+# overlap = mygenes_set.intersection(ddsgenes_set)
+# # print(len(overlap))
 
-# find genes that are unique to mygenes
-mygenes_unique = mygenes_set.difference(ddsgenes_set)
-print(len(mygenes_unique))
+# # find genes that are unique to mygenes
+# mygenes_unique = mygenes_set.difference(ddsgenes_set)
+# # print(len(mygenes_unique))
 
-# find genes that are unique to ddsgenes
-ddsgenes_unique = ddsgenes_set.difference(mygenes_set)
-print(len(ddsgenes_unique))
+# # find genes that are unique to ddsgenes
+# ddsgenes_unique = ddsgenes_set.difference(mygenes_set)
+# # print(len(ddsgenes_unique))
 
-jaccardindex = ((len(overlap)) / (len(mygenes_unique)+len(ddsgenes_unique))) * 100
+# jaccardindex = ((len(overlap)) / (len(mygenes_unique)+len(ddsgenes_unique))) * 100
 
 
-print(jaccardindex)
+# # print(jaccardindex)
+
+
+# ddsgenes = pd.read_csv("significantgenesdeseq.csv")
+resultsdds = pd.read_csv("resultsdds.csv")
+
+# drop all rows with NaN values
+
+clean_resultsdds = resultsdds.dropna()
+
+# find the log2Fold Change
+log2foldchange_volcano = clean_resultsdds["log2FoldChange"]
+
+# find the -log10(padj)
+padj_resultsdds = clean_resultsdds["padj"]
+log10padj_resultsdds = -np.log10(padj_resultsdds)
+
+# find genes that are significant at 10% FDR
+morethan10FDR = clean_resultsdds.loc[clean_resultsdds["padj"] <= 0.1]
+FDRandlog2fold = morethan10FDR.loc[abs(morethan10FDR["log2FoldChange"]) >=1]
+
+
+plt.figure()
+plt.scatter(log2foldchange_volcano,log10padj_resultsdds, color = "grey", alpha = 0.5)
+plt.xlabel("Log Fold Change")
+plt.ylabel("-log10(pvalue)")
+plt.title("Volcano Plot of ddsgenes")
+plt.scatter(FDRandlog2fold["log2FoldChange"], -np.log10(FDRandlog2fold["padj"]), color= "red", alpha = 0.5)
+plt.axhline(y=1, color = "grey", linestyle="--")
+plt.axvline(x=1, color = "grey", linestyle="--")
+plt.axvline(x=-1, color = "grey", linestyle="--")
+plt.savefig("Volcanoplot.png")
+
 
 
 
