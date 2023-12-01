@@ -43,17 +43,36 @@ full_design_df = pd.read_csv("full_design.csv", index_col=0)
 # Expression of a single gene between sexes
 # for gene MXD4 find logged normalized counts
 
-step12data = full_design_df.loc[:, ["MXD4", "SEX"]]
-malestep12 = step12data[step12data["SEX"] == 1]
-femalestep12 = step12data[step12data["SEX"] == 2]
+# step12data = full_design_df.loc[:, ["MXD4", "SEX"]]
+# malestep12 = step12data[step12data["SEX"] == 1]
+# femalestep12 = step12data[step12data["SEX"] == 2]
+
+# plt.figure()
+# plt.hist(malestep12["MXD4"], bins=20, color="orange", alpha = 0.25, label="Male")
+# plt.hist(femalestep12["MXD4"], bins=20, color="blue", alpha = 0.25, label="Female")
+# plt.xlabel("Logged Normalized Expression")
+# plt.ylabel("Counts")
+# plt.legend()
+# plt.savefig("Exercise1.2.png")
+
+# Distribution of subject ages
+
+# Find the subjects in each age category
+
+Agedata = full_design_df["AGE"].value_counts().sort_index()
+
+categories = []
+values = []
+for i in Agedata.index:
+	categories.append(i)
+for i in Agedata:
+	values.append(i)
 
 plt.figure()
-plt.hist(malestep12["MXD4"], bins=20, color="orange", alpha = 0.25, label="Male")
-plt.hist(femalestep12["MXD4"], bins=20, color="blue", alpha = 0.25, label="Female")
-plt.xlabel("Logged Normalized Expression")
+plt.bar(categories, values)
+plt.xlabel("Age Categories")
 plt.ylabel("Counts")
-plt.legend()
-plt.savefig("Exercise1.2.png")
+plt.savefig("Exercise1.3.png")
 
 
 
