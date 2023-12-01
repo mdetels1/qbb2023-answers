@@ -28,14 +28,40 @@ full_design_df = pd.read_csv("full_design.csv", index_col=0)
 
 # find logged normalized counts for all genes, excluding the last three (which are sex, age, dthhrdy)
 
-step11data = full_design_df.loc["GTEX-113JC",:"MT-TP"]
-step11_nozeros = step11data[step11data != 0]
-print(step11_nozeros)
+# step11data = full_design_df.loc["GTEX-113JC",:"MT-TP"]
+# step11_nozeros = step11data[step11data != 0]
+# print(step11_nozeros)
+
+# plt.figure()
+# plt.hist(step11_nozeros, bins=20)
+# plt.xlabel("Logged Normalized Expression")
+# plt.ylabel("Counts")
+# plt.savefig("Exercise1.1.png")
+
+# # print(full_design_df)
+
+# Expression of a single gene between sexes
+# for gene MXD4 find logged normalized counts
+
+step12data = full_design_df.loc[:, ["MXD4", "SEX"]]
+malestep12 = step12data[step12data["SEX"] == 1]
+femalestep12 = step12data[step12data["SEX"] == 2]
 
 plt.figure()
-plt.hist(step11_nozeros, bins=20)
+plt.hist(malestep12["MXD4"], bins=20, color="orange", alpha = 0.25, label="Male")
+plt.hist(femalestep12["MXD4"], bins=20, color="blue", alpha = 0.25, label="Female")
 plt.xlabel("Logged Normalized Expression")
 plt.ylabel("Counts")
-plt.savefig("Exercise1.1.png")
+plt.legend()
+plt.savefig("Exercise1.2.png")
 
-# print(full_design_df)
+
+
+
+
+
+
+
+
+
+
