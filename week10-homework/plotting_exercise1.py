@@ -59,26 +59,48 @@ full_design_df = pd.read_csv("full_design.csv", index_col=0)
 
 # Find the subjects in each age category
 
-Agedata = full_design_df["AGE"].value_counts().sort_index()
+# Agedata = full_design_df["AGE"].value_counts().sort_index()
 
-categories = []
-values = []
-for i in Agedata.index:
-	categories.append(i)
-for i in Agedata:
-	values.append(i)
+# categories = []
+# values = []
+# for i in Agedata.index:
+# 	categories.append(i)
+# for i in Agedata:
+# 	values.append(i)
+
+# plt.figure()
+# plt.bar(categories, values)
+# plt.xlabel("Age Categories")
+# plt.ylabel("Counts")
+# plt.savefig("Exercise1.3.png")
+
+# Sex-stratified expression with age
+# Pull out logged normalized counts and age and sex for LPXN
+
+step14data = full_design_df.loc[:,["LPXN", "AGE", "SEX"]].sort_index()
+step14data = step14data.groupby(["AGE", "SEX"])["LPXN"].median()
+print(step14data)
+
+male_median=[]
+female_median=[]
+for i in range(len(step14data.index)):
+	if step14data.index[i][1] == 1:
+		male_median.append(step14data[i])
+	if step14data.index[i][1] == 2:
+		female_median.append(step14data[i])
+
+print(male_median)
+print(female_median)
+
+time = ["20-29", "30-39", "40-49", "50-59", "60-69", "70-79"]
 
 plt.figure()
-plt.bar(categories, values)
+plt.plot(time, male_median, label = "Male")
+plt.plot(time, female_median, label = "Female")
+plt.legend()
 plt.xlabel("Age Categories")
-plt.ylabel("Counts")
-plt.savefig("Exercise1.3.png")
-
-
-
-
-
-
+plt.ylabel("Median Expression")
+plt.savefig("Exercise1.4.png")
 
 
 
