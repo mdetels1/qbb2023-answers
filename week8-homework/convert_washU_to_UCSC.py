@@ -68,15 +68,24 @@ for i in output.index:
 		USCS.loc[newRowNumber, "targetStart"] = output["Start1"][output["Start1"] == output.loc[i, 'Start1']].to_list()[0]
 		USCS.loc[newRowNumber, "targetEnd"] = output["Stop1"][output["Start1"] == output.loc[i, 'Start1']].to_list()[0]
 
-f = open("ucsc.bed" , "w")
-f.write('track type=interact name="pCHIC" description="Chromatin interactions" useScore=on maxHeightPixels=200:100:50 visibility=full' + "\n")
-f.close()
+# f = open("ucsc.bed" , "w")
+# f.write('track type=interact name="pCHIC" description="Chromatin interactions" useScore=on maxHeightPixels=200:100:50 visibility=full' + "\n")
+# f.close()
 
-USCS.to_csv("ucsc.bed", sep = '\t', mode="a", index=False)
+# USCS.to_csv("ucsc.bed", sep = '\t', mode="a", index=False)
 
 
-print(USCS)
+USCS_bait = USCS[USCS["targetStrand"]==USCS["sourceStrand"]]
 
+high_scores1 = USCS_bait.sort_values("score", ascending=False).head(6)
+
+print(high_scores1)
+
+USCS_nonbait = USCS[USCS["targetStrand"] != USCS["sourceStrand"]]
+
+high_scores2 = USCS_nonbait.sort_values("score", ascending=False).head(6)
+
+print(high_scores2)
 
 # print(nonbait)
 # rownames - output.index
