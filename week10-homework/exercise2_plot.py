@@ -32,18 +32,35 @@ numbats_df = pd.read_csv("numbats.csv")
 
 # # time of day numbats are seen
 # find time of day
-hour = numbats_df["hour"]
+# hour = numbats_df["hour"]
 
-noNahour = hour[hour.notnull()]
+# noNahour = hour[hour.notnull()]
+
+# plt.figure()
+# plt.hist(noNahour, bins = 24)
+# plt.xlabel("Hour of the Day")
+# plt.ylabel("Count")
+# plt.title("Sightings of Numbats over the Hours of the Day")
+# plt.savefig("Numbatsovertheday.png")
+
+# find the months
+
+months=numbats_df["month"]
+
+noNamonths = months[months.notnull()]
+
+monthlist = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+finaldata = noNamonths.value_counts().loc[monthlist]
+
+print(finaldata)
 
 plt.figure()
-plt.hist(noNahour, bins = 24)
-plt.xlabel("Hour of the Day")
-plt.ylabel("Count")
-plt.title("Sightings of Numbats over the Hours of the Day")
-plt.savefig("Numbatsovertheday.png")
-
-
+plt.bar(finaldata.index, finaldata)
+plt.title("Sightings of Numbats per Month")
+plt.xlabel("Months")
+plt.ylabel("Number of Sightings")
+plt.savefig("SightingsofNumbatsperMonth.png")
 
 
 
