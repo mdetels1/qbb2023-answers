@@ -27,3 +27,18 @@ sc.pl.umap(adata, color="leiden", ax = ax[0], title="UMAP", show=False)
 sc.pl.tsne(adata, color="leiden", ax = ax[1], title="tSNE", show=False)
 fig.tight_layout()
 fig.savefig("Exercise1plot.png")
+
+# Ranking genes in each cluster
+wilcoxon_adata = sc.tl.rank_genes_groups(adata, groupby='leiden', method='wilcoxon', use_raw=True, copy=True)
+print(wilcoxon_adata.uns['rank_genes_groups'])
+logreg_adata = sc.tl.rank_genes_groups(adata, groupby='leiden', method='logreg', use_raw=True, copy=True)
+print(logreg_adata.uns['rank_genes_groups'])
+
+# Visualizing marker genes
+fig, ax = plt.subplots(ncols=2)
+sc.pl.rank_genes_groups(wilcoxon_adata, n_genes=25, ax = ax[0], title="Wilcoxon rank-sum", sharey=False, show=False, use_raw=True)
+sc.pl.rank_genes_groups(logreg_adata, n_genes=25, ax=ax[1], title="Logistic Regression", sharey=False, show=False, use_raw=True)
+fig.savefig("Exercise2plot.png")
+
+
+
